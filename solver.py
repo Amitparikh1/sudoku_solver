@@ -12,6 +12,13 @@ board = [
 ]
 
 ## Function to pick an empty square
+def find_empty_square(board):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] == 0:
+                return (i,j) #returns the row,column of empty square
+
+
 ## Function to loop through numbers
 ## Function to find if the number is valid
 ## Function to print out board 
@@ -24,7 +31,7 @@ def print_board(board):
         for j in range(len(board[0])):
             ## print vertical lines after every 3rd column
             if j % 3 == 0 and j!=0:
-                print(" | ", end = "") ##print but don't go to the next line
+                print(" | ", end = "") #print but don't go to the next line
             ## if it is the last number in the row allow to print on the next line
             if j == 8:
                 print(board[i][j])
