@@ -17,9 +17,14 @@ def find_empty_square(board):
         for j in range(len(board[0])):
             if board[i][j] == 0:
                 return (i,j) #returns the row,column of empty square
+                #call try_numbers
 
 
 ## Function to loop through numbers
+def try_numbers(board):
+    i = 0
+    while i<=9:
+        #try a number - i - and validate it
 ## Function to find if the number is valid
 ## Function to print out board 
 def print_board(board):
