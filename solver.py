@@ -13,14 +13,14 @@ board = [
 ## Backtracking algorithm
 def solver(board):
     find = find_empty_square(board)
-    if not find:
+    if not find: # if no more empty squares are found the board is complete
         return True
     else:
         row,col = find
     for i in range (1,10): # Loop through values
        if validate(board,i,(row,col)) == True: # If valid, plug in value
            board[row][col]= i
-           if solver(board): # recursively try to solve the board
+           if solver(board): # recursively try to solve the board - calls solver function again to try the next value
                return True
            board[row][col] = 0 #reset last entered value to 0 because solution did not work 
 
