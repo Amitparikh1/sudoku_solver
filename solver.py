@@ -10,6 +10,21 @@ board = [
     [1,2,0,0,0,7,4,0,0],
     [0,4,9,2,0,6,0,0,7]
 ]
+## Backtracking algorithm
+def solver(board):
+    find = find_empty_square(board)
+    if not find:
+        return True
+    else:
+        row,col = find
+    for i in range (1,10): # Loop through values
+       if validate(board,i,(row,col)) == True: # If valid, plug in value
+           board[row][col]= i
+           if solver(board): # recursively try to solve the board
+               return True
+           board[row][col] = 0 #reset last entered value to 0 because solution did not work 
+
+    return False #last solution did not work 
 
 ## Function to pick an empty square
 def find_empty_square(board):
@@ -18,14 +33,30 @@ def find_empty_square(board):
             if board[i][j] == 0:
                 return (i,j) #returns the row,column of empty square
                 #call try_numbers
+    return None # if no squares are empty
 
-
-## Function to loop through numbers
-def try_numbers(board):
-    i = 0
-    while i<=9:
-        #try a number - i - and validate it
 ## Function to find if the number is valid
+def validate(board,num,pos):
+    ## Check row
+    for i in range(len(board[0])):
+        if board[pos[0]][i]== num and pos[1] != i:
+            return False
+    ## Check column
+    for i in range(len(board)):
+        if board[i][pos[1]]==num and pos[0] != i:
+            return False
+    ## Check square
+    box_x = pos[1]//3
+    box_y = pos[0]//3
+    
+    for i in range(box_y*3,box_y*3+3):
+        for j in range(box_x*3,box_x*3+3):
+            if num == board[i][j] and (i,j) != pos:
+                return False
+    ## If match not found - return true
+    return True
+
+
 ## Function to print out board 
 def print_board(board):
     for i in range(len(board)):
@@ -42,5 +73,13 @@ def print_board(board):
                 print(board[i][j])
             else: 
                 print(str(board[i][j])+" ",end = "")
+
+## Print board before solution
+print("Unsolved:")
+print_board(board)
+## Solve the board
+solver(board)
+## Print board after solution
+print("Solved:")
 print_board(board)
 
