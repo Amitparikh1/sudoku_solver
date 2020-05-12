@@ -11,7 +11,7 @@ board = [
     [0,4,9,2,0,6,0,0,7]
 ]
 ## Backtracking algorithm
-def solver(board):
+def solve_board(board):
     find = find_empty_square(board)
     if not find: # if no more empty squares are found the board is complete
         return True
@@ -20,7 +20,7 @@ def solver(board):
     for i in range (1,10): # Loop through values
        if validate(board,i,(row,col)) == True: # If valid, plug in value
            board[row][col]= i
-           if solver(board): # recursively try to solve the board - calls solver function again to try the next value
+           if solve_board(board): # recursively try to solve the board - calls solver function again to try the next value
                return True
            board[row][col] = 0 #reset last entered value to 0 because solution did not work 
 
@@ -78,7 +78,7 @@ def print_board(board):
 print("Unsolved:")
 print_board(board)
 ## Solve the board
-solver(board)
+solve_board(board)
 ## Print board after solution
 print("Solved:")
 print_board(board)
